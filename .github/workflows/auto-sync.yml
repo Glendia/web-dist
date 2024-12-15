@@ -1,0 +1,17 @@
+name: Auto - Sync Upstream
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天零点执行一次
+jobs:
+  auto - sync:
+    runs - on: ubuntu - latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          repository: ${{ github.repository }}
+          ref: ${{ github.ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Sync Upstream
+        run: |
+          git remote add upstream https://github.com/alist - org/web - dist
+          git pull upstream main
